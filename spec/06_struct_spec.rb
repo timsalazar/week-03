@@ -6,8 +6,8 @@
 # 
 # @see http://en.wikipedia.org/wiki/Batman
 
-Villian = Struct.new :name
-Superhero = Struct.new :name, :origin, :nemesis
+Villian = Struct.new :name, :nemesis
+Superhero = Struct.new :name, :origin, :nemesis, :nick_name, :alter_ego
 AlterEgo = Struct.new :name, :superhero
 
 describe Villian do
@@ -20,7 +20,7 @@ describe Villian do
   # 
   # @see https://www.relishapp.com/rspec/rspec-core/docs/helper-methods/let-and-let
   # 
-  let(:batman) { Superhero.new "Batman", "Gotham City" }
+  let(:batman) { Superhero.new "Batman", "Gotham City", "Joker"}
   
   
   #
@@ -29,7 +29,7 @@ describe Villian do
   #
   # @see https://www.relishapp.com/rspec/rspec-core/docs/subject/explicit-subject
   #
-  subject { Villian.new "Joker" }
+  subject { Villian.new "Joker", "Batman" }
   
   
   it "should have the correct name" do
@@ -44,12 +44,12 @@ describe Villian do
     it "should respond_to? nemesis" do
 
       subject.should respond_to :nemesis
-
+                
     end
     
     it "should have the correct nemesis" do
       
-      subject.nemesis.should == batman 
+      subject.nemesis.should == "Batman" 
       
     end
     
@@ -71,13 +71,15 @@ describe Superhero do
 
   let(:bruce_wayne) { AlterEgo.new "Bruce Wayne" }
   
+  let(:nick_name) { NickName.new "The Caped Crusader" }
+    
   #
   # This is an example of using RSpec's explicit subject. The value here is 
   # returned each time `subject` is used within the code.
   #
   # @see https://www.relishapp.com/rspec/rspec-core/docs/subject/explicit-subject
   #
-  subject { Superhero.new "Batman", "Gotham City", joker }
+  subject { Superhero.new "Batman", "Gotham City", joker, "The Caped Crusader", bruce_wayne }
   
   it "should have a name" do
     subject.should respond_to :name
