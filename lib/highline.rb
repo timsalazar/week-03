@@ -16,3 +16,17 @@ company = ask("Company? ") do |question|
 end
 
 say "You work for #{company}"
+
+choose do |menu|
+  menu.prompt = "Please choose your favorite prograaming language."
+  menu.choice(:ruby) { say ("Good choice!") }
+  menu.choices(:python, :perl) { say("Not from around here, are you?") }
+end
+
+birthday = ask("Birthday? ") do |question|
+  question.default = "You were born sometime, right?"
+end
+
+say "You were born on #{birthday}"
+
+ask("Birthday? ", Date) 
